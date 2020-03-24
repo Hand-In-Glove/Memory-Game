@@ -2,11 +2,11 @@ import React from "react";
 import Square from "../Square";
 import css from "./Grid.module.css";
 
-function Grid({ gameBoard }) {
+function Grid({ gameBoard, addToPlayerSequence }) {
   return (
     <div className={css.grid}>
       {gameBoard.map(item => (
-        <Square />
+        <Square addToPlayerSequence={addToPlayerSequence} id={item} />
       ))}
     </div>
   );
