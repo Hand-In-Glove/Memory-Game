@@ -4,14 +4,14 @@ Build a memory game that displays an incremental sequence on a grid which a user
 
 -- create a gameSequence array that holds the sequence to be copied, pushing a new grid location value
 
--- create a playerSequence array that holds players selections
+-- create a playerSequence array that holds players selections - maybe not necessary
 
 ## GAME LOGIC
 
 1. add random grid location from board array to gameSequence array
 2. animate corresponding grid square
 3. player select square with click, add player selection to playerSequence array
-4. compare playerSequence array with gameSequence array
+4. compare playerSequence array with gameSequence array (How/when should we compare need to compare every click so can error after wrong move does this click match this position on gameSeq array, increment position,-isPlaying state to record clicks do we need to wipe player sequence everytime?)
 5. 1. if they match repeat from step 1
 6. 2. if they don't match game over, display message.
 
