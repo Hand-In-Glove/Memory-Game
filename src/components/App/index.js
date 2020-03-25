@@ -40,7 +40,7 @@ function App() {
   function startRound() {
     setRoundsPlayed(roundsPlayed + 1);
     addToGameSequence();
-    setExpected(gameSequence[roundsPlayed - 1]);
+    // setExpected(gameSequence[gameSequence.length - numberToGuess]);
   }
   //function to compare playerSequence with gameSequence
   function compareSequence(clicked) {
@@ -48,6 +48,7 @@ function App() {
     //if playerSequence matches gameSequence, run another gameSequence
     //if it does not match, display Try Again message below board
     if (clicked === expected) {
+      setExpected(gameSequence[gameSequence.length - numberToGuess]);
       if (numberToGuess === 0) {
         alert("well done, matched");
         startRound();
