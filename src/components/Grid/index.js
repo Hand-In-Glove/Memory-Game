@@ -4,11 +4,11 @@ import css from "./Grid.module.css";
 
 //component to render grid out of individual square components
 
-function Grid({ gameBoard, addToPlayerSequence }) {
+function Grid({ gameBoard, compareSequence }) {
   return (
     <div className={css.grid}>
       {gameBoard.map(item => (
-        <Square addToPlayerSequence={addToPlayerSequence} id={item} />
+        <Square compareSequence={compareSequence} id={item} />
       ))}
     </div>
   );
