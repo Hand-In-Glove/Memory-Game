@@ -1,10 +1,19 @@
 Build a memory game that displays an incremental sequence on a grid which a user must copy, if they copy correctly
 
-//create a board array that holds values/grid locations for each square
+-- create a board array that holds values/grid locations for each square
 
-//create a sequence array that holds the sequence to be copied, pushing a new grid location value
+-- create a gameSequence array that holds the sequence to be copied, pushing a new grid location value
 
-//create a play array
+-- create a playerSequence array that holds players selections
+
+## GAME LOGIC
+
+1. add random grid location from board array to gameSequence array
+2. animate corresponding grid square
+3. player select square with click, add player selection to playerSequence array
+4. compare playerSequence array with gameSequence array
+5. 1. if they match repeat from step 1
+6. 2. if they don't match game over, display message.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
