@@ -19,6 +19,8 @@ function App() {
   //state to hold the expected value for comparison
   const [expected, setExpected] = useState(null);
 
+  const [isGameOver, setIsGameOver] = useState(false);
+
   useEffect(() => {
     setNumberToGuess(gameSequence.length - 1);
   }, [gameSequence]);
@@ -40,8 +42,15 @@ function App() {
   function startRound() {
     setRoundsPlayed(roundsPlayed + 1);
     addToGameSequence();
-    // setExpected(gameSequence[gameSequence.length - numberToGuess]);
   }
+
+  function resetGame() {
+    setRoundsPlayed(0);
+    setGameSequence([]);
+    setExpected(null);
+    setIsGameOver(!isGameOver);
+  }
+
   //function to compare playerSequence with gameSequence
   function compareSequence(clicked) {
     setNumberToGuess(numberToGuess - 1);
@@ -55,6 +64,7 @@ function App() {
       }
     } else {
       alert("Didn't match, Game Over");
+      setIsGameOver(!isGameOver);
     }
   }
 
@@ -64,16 +74,30 @@ function App() {
     <>
       <div className="App">
         <Grid gameBoard={gameBoard} compareSequence={compareSequence} />
-        <h2>You have played {roundsPlayed} rounds!</h2>
+        {roundsPlayed > 0 && (
+          <h2>You have made it through {roundsPlayed - 1} rounds!</h2>
+        )}
       </div>
-      <button
-        style={{ display: "block", margin: "0 auto" }}
-        onClick={() => {
-          startRound();
-        }}
-      >
-        Start Round
-      </button>
+      {roundsPlayed === 0 && (
+        <button
+          style={{ display: "block", margin: "0 auto" }}
+          onClick={() => {
+            startRound();
+          }}
+        >
+          Start GAME
+        </button>
+      )}
+      {isGameOver && (
+        <button
+          style={{ display: "block", margin: "0 auto" }}
+          onClick={() => {
+            resetGame();
+          }}
+        >
+          RESET GAME
+        </button>
+      )}
     </>
   );
 }
