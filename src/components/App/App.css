@@ -1,15 +1,40 @@
 .App {
   text-align: center;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 20% 1fr 1fr;
   justify-content: center;
+  align-content: center;
+  height: 100vh;
 }
-.animatedSquare {
-  height: 96px;
-  width: 96px;
-  margin: 2px;
-  border: 1px solid black;
-  border-radius: 10px;
-  background: radial-gradient(whitesmoke, red);
+
+button {
+  grid-row: 3;
+  grid-column: 2;
+  font-family: var(--MainFont);
+  border: solid black 2px;
+  border-radius: 30px;
+  font-size: 1em;
+  padding: 0.7em;
+  width: 7em;
+  height: 2em;
+  margin: 15px;
+}
+h1 {
+  grid-row: 1;
+  grid-column: 2;
+
+  font-family: var(--MainFont);
+  font-size: 100px;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}
+
+h2 {
+  font-family: var(--MainFont);
+  grid-row: 2;
+  grid-column: 3;
+  text-shadow: 2px 2px 5px white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
