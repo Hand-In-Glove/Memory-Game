@@ -16,6 +16,19 @@
   margin: 2px;
   border: white 2px solid;
   border-radius: 100px;
-  background: radial-gradient(whitesmoke, rgb(4, 231, 4));
+  background: radial-gradient(whitesmoke, aqua);
   box-shadow: 2px 2px 5px black;
+  animation: flash 1s;
+}
+
+@keyframes flash {
+  0% {
+    background: radial-gradient(whitesmoke, aqua);
+  }
+  50% {
+    background: radial-gradient(whitesmoke, rgb(4, 231, 4));
+  }
+  100% {
+    background: radial-gradient(whitesmoke, aqua);
+  }
 }

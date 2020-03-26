@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useSpring, animated } from "react-spring";
 
 import "./App.css";
 import Grid from "../Grid";
 
 function App() {
+  const fade = useSpring({
+    from: {
+      opacity: 0
+    },
+    opacity: 1
+  });
+
   //array to hold grid locations
   const [gameBoard, setGameBoard] = useState([
     { illuminated: false },
@@ -33,9 +41,6 @@ function App() {
 
   useEffect(() => {
     setNumberToGuess(gameSequence.length - 1);
-  }, [gameSequence]);
-
-  useEffect(() => {
     setExpected(gameSequence[0]);
   }, [gameSequence]);
 
@@ -119,10 +124,24 @@ function App() {
     console.log(pattern);
   }
 
+  //turn it off again?
+  // function deIlluminateSquare(index) {
+  //   const pattern = [
+  //     ...gameBoard.slice(0, index),
+  //     {
+  //       ...gameBoard[index],
+  //       illuminated: false
+  //     },
+  //     ...gameBoard.slice(index + 1)
+  //   ];
+  //   setGameBoard(pattern);
+  //   console.log(pattern);
+  // }
+
   return (
     <>
       <div className="App">
-        <h1>Simon!</h1>
+        <animated.h1 style={fade}>Simon!</animated.h1>
         <Grid gameBoard={gameBoard} compareSequence={compareSequence} />
         <h2>score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}</h2>
 
