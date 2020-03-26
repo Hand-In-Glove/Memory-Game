@@ -3,19 +3,12 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Grid from "../Grid";
 
+const defaultGrid = new Array(9);
+defaultGrid.fill({ illuminated: false });
+
 function App() {
   //array to hold grid locations
-  const [gameBoard, setGameBoard] = useState([
-    { illuminated: false },
-    { illuminated: false },
-    { illuminated: false },
-    { illuminated: false },
-    { illuminated: false },
-    { illuminated: false },
-    { illuminated: false },
-    { illuminated: false },
-    { illuminated: false }
-  ]);
+  const [gameBoard, setGameBoard] = useState(defaultGrid);
 
   //state to hold number of rounds played
   const [roundsPlayed, setRoundsPlayed] = useState(0);
@@ -66,6 +59,7 @@ function App() {
     setGameSequence([4]);
     setExpected(null);
     setIsGameOver(!isGameOver);
+    setGameBoard(defaultGrid);
   }
 
   //function to compare playerSequence with gameSequence
@@ -97,6 +91,9 @@ function App() {
     ];
     setGameBoard(pattern);
     console.log(pattern);
+    setTimeout(() => {
+      switchOff(index);
+    }, 500 * index);
   }
 
   //how the flip do we animate this bleddy grid? - we need to loop over the gameSequence and for each item in array change the className for an interval
@@ -117,6 +114,21 @@ function App() {
     ];
     setGameBoard(pattern);
     console.log(pattern);
+    setTimeout(() => {
+      switchOff(index);
+    }, 500 * index);
+  }
+
+  function switchOff(index) {
+    const pattern = [
+      ...gameBoard.slice(0, index),
+      {
+        ...gameBoard[index],
+        illuminated: false
+      },
+      ...gameBoard.slice(index + 1)
+    ];
+    setGameBoard(pattern);
   }
 
   return (
