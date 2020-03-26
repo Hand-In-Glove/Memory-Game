@@ -3,10 +3,13 @@
   display: flex;
   justify-content: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.animatedSquare {
+  height: 96px;
+  width: 96px;
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: radial-gradient(whitesmoke, red);
 }
 
 @media (prefers-reduced-motion: no-preference) {

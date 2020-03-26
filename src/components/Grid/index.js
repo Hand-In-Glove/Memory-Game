@@ -4,11 +4,19 @@ import css from "./Grid.module.css";
 
 //component to render grid out of individual square components
 
-function Grid({ gameBoard, compareSequence }) {
+//each square is identified by an id of 1-9
+//select the square to highlight by passing an id to it Square(id)
+//
+
+function Grid({ gameBoard, compareSequence, illuminated }) {
   return (
     <div className={css.grid}>
-      {gameBoard.map(item => (
-        <Square compareSequence={compareSequence} id={item} />
+      {gameBoard.map((item, index) => (
+        <Square
+          compareSequence={compareSequence}
+          id={index}
+          illuminated={item.illuminated}
+        />
       ))}
     </div>
   );

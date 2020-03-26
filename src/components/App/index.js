@@ -5,13 +5,23 @@ import Grid from "../Grid";
 
 function App() {
   //array to hold grid locations
-  const [gameBoard, setGameBoard] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [gameBoard, setGameBoard] = useState([
+    { illuminated: false },
+    { illuminated: false },
+    { illuminated: false },
+    { illuminated: false },
+    { illuminated: false },
+    { illuminated: false },
+    { illuminated: false },
+    { illuminated: false },
+    { illuminated: false }
+  ]);
 
   //state to hold number of rounds played
   const [roundsPlayed, setRoundsPlayed] = useState(0);
 
   //array to hold randomly generated grid locations as game sequence
-  const [gameSequence, setGameSequence] = useState([]);
+  const [gameSequence, setGameSequence] = useState([0, 1, 2, 3]);
 
   //state to hold number of locations to guess
   const [numberToGuess, setNumberToGuess] = useState(gameSequence.length);
@@ -31,9 +41,11 @@ function App() {
 
   //GAME LOGIC
   //function to add random grid location to gameSequence
+
   function addToGameSequence() {
     setGameSequence(
-      [...gameSequence, gameBoard[Math.floor(Math.random() * gameBoard.length)]]
+      [...gameSequence, Math.floor(Math.random() * gameBoard.length)]
+
       // gameSequence.push(gameBoard[Math.floor(Math.random() * gameBoard.length)])
     );
   }
@@ -42,6 +54,11 @@ function App() {
   function startRound() {
     setRoundsPlayed(roundsPlayed + 1);
     addToGameSequence();
+    gameSequence.map((item, i) => {
+      setTimeout(() => {
+        illuminateSquare(item);
+      }, 1000 * i);
+    });
   }
 
   function resetGame() {
@@ -69,6 +86,24 @@ function App() {
   }
 
   //how the flip do we animate this bleddy grid? - we need to loop over the gameSequence and for each item in array change the className for an interval
+  // this function re renders the gameBoard each time the id of the square passed to it changes.
+  // the id changes as we loop through the array gameSequence
+  // the function needs to set the className to css.animatedSquare
+  // and back again
+
+  // This uses the index of the square
+  function illuminateSquare(index) {
+    const pattern = [
+      ...gameBoard.slice(0, index),
+      {
+        ...gameBoard[index],
+        illuminated: true
+      },
+      ...gameBoard.slice(index + 1)
+    ];
+    setGameBoard(pattern);
+    console.log(pattern);
+  }
 
   return (
     <>
