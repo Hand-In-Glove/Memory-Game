@@ -21,7 +21,7 @@ function App() {
   const [roundsPlayed, setRoundsPlayed] = useState(0);
 
   //array to hold randomly generated grid locations as game sequence
-  const [gameSequence, setGameSequence] = useState([0, 1, 2, 3]);
+  const [gameSequence, setGameSequence] = useState([4]);
 
   //state to hold number of locations to guess
   const [numberToGuess, setNumberToGuess] = useState(gameSequence.length);
@@ -63,19 +63,20 @@ function App() {
 
   function resetGame() {
     setRoundsPlayed(0);
-    setGameSequence([]);
+    setGameSequence([4]);
     setExpected(null);
     setIsGameOver(!isGameOver);
   }
 
   //function to compare playerSequence with gameSequence
   function compareSequence(clicked) {
+    illuminatePlayerSquare(clicked);
     setNumberToGuess(numberToGuess - 1);
     //if playerSequence matches gameSequence, run another gameSequence
     //if it does not match, display Try Again message below board
     if (clicked === expected) {
       setExpected(gameSequence[gameSequence.length - numberToGuess]);
-      if (numberToGuess === 0) {
+      if (numberToGuess === 1) {
         alert("well done, matched");
         startRound();
       }
@@ -83,6 +84,19 @@ function App() {
       alert("Didn't match, Game Over");
       setIsGameOver(!isGameOver);
     }
+  }
+
+  function illuminatePlayerSquare(index) {
+    const pattern = [
+      ...gameBoard.slice(0, index),
+      {
+        ...gameBoard[index],
+        illuminated: true
+      },
+      ...gameBoard.slice(index + 1)
+    ];
+    setGameBoard(pattern);
+    console.log(pattern);
   }
 
   //how the flip do we animate this bleddy grid? - we need to loop over the gameSequence and for each item in array change the className for an interval
@@ -108,31 +122,31 @@ function App() {
   return (
     <>
       <div className="App">
+        <h1>Simon!</h1>
         <Grid gameBoard={gameBoard} compareSequence={compareSequence} />
-        {roundsPlayed > 0 && (
-          <h2>You have made it through {roundsPlayed - 1} rounds!</h2>
+        <h2>score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}</h2>
+
+        {roundsPlayed === 0 && (
+          <button
+            style={{ display: "block", margin: "0 auto" }}
+            onClick={() => {
+              startRound();
+            }}
+          >
+            Play!
+          </button>
+        )}
+        {isGameOver && (
+          <button
+            style={{ display: "block", margin: "0 auto" }}
+            onClick={() => {
+              resetGame();
+            }}
+          >
+            Go again!
+          </button>
         )}
       </div>
-      {roundsPlayed === 0 && (
-        <button
-          style={{ display: "block", margin: "0 auto" }}
-          onClick={() => {
-            startRound();
-          }}
-        >
-          Start GAME
-        </button>
-      )}
-      {isGameOver && (
-        <button
-          style={{ display: "block", margin: "0 auto" }}
-          onClick={() => {
-            resetGame();
-          }}
-        >
-          RESET GAME
-        </button>
-      )}
     </>
   );
 }
