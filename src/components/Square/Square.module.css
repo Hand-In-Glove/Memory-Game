@@ -15,3 +15,12 @@
   border-radius: 10px;
   background: radial-gradient(whitesmoke, red);
 }
+
+.animate {
+  height: 96px;
+  width: 96px;
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: radial-gradient(whitesmoke, red);
+}
