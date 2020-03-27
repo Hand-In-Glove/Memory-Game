@@ -22,6 +22,9 @@ function App() {
   //state to hold the expected value for comparison
   const [expected, setExpected] = useState(null);
 
+  //state to display if guess was correct or not
+  const [result, setResult] = useState("");
+
   const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
@@ -71,11 +74,13 @@ function App() {
     if (clicked === expected) {
       setExpected(gameSequence[gameSequence.length - numberToGuess]);
       if (numberToGuess === 1) {
-        alert("well done, matched");
-        startRound();
+        setResult("well done, matched");
+        setTimeout(() => {
+          startRound();
+        }, 1000);
       }
     } else {
-      alert("Didn't match, Game Over");
+      setResult("Didn't match, Game Over");
       setIsGameOver(!isGameOver);
     }
   }
@@ -148,6 +153,7 @@ function App() {
             Play!
           </button>
         )}
+        <h2>{result}</h2>
         {isGameOver && (
           <button
             style={{ display: "block", margin: "0 auto" }}
