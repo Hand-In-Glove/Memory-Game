@@ -3,24 +3,28 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Grid from "../Grid";
 
-const defaultHardGrid = new Array(9);
-defaultHardGrid.fill({ illuminated: false });
+// const defaultHardGrid = new Array(9);
+// defaultHardGrid.fill({ illuminated: false });
 
-const defaultEasyGrid = new Array(4);
-defaultEasyGrid.fill({ illuminated: false });
+// const defaultEasyGrid = new Array(4);
+// defaultEasyGrid.fill({ illuminated: false });
 
-// const defaultGrid = new Array(9);
-// defaultGrid.fill({ illuminated: false, level: "medium" });
-// const easy = new Array(3);
-// easy.fill({ illuminated: false, level: "easy" });
-// const hard = new Array(12);
-// hard.fill({ illuminated: false, level: "hard" });
-// const insane = new Array(16);
-// insane.fill({ illuminated: false, level: "insane" });
+//easy grid x3
+const easy = new Array(3);
+easy.fill({ illuminated: false, level: "easy" });
+//medium grid 3x3
+const medium = new Array(9);
+medium.fill({ illuminated: false, level: "medium" });
+//hard grid 3x4
+const hard = new Array(12);
+hard.fill({ illuminated: false, level: "hard" });
+//insane grid 4x4
+const insane = new Array(16);
+insane.fill({ illuminated: false, level: "insane" });
 
 function App() {
   //array to hold grid locations - starts on hard by default
-  const [gameBoard, setGameBoard] = useState(defaultHardGrid);
+  const [gameBoard, setGameBoard] = useState(medium);
 
   //state to hold number of rounds played
   const [roundsPlayed, setRoundsPlayed] = useState(0);
@@ -40,7 +44,7 @@ function App() {
   const [result, setResult] = useState("");
 
   //state to hold game difficulty, number of playable grid locations is dependent on this state
-  const [diff, setDiff] = useState("hard");
+  const [diff, setDiff] = useState("medium");
 
   const [isGameOver, setIsGameOver] = useState(false);
 
@@ -50,22 +54,26 @@ function App() {
   }, [gameSequence]);
 
   useEffect(() => {
-    if (diff === "hard") {
-      setGameBoard(defaultHardGrid);
-    } else {
-      setGameBoard(defaultEasyGrid);
+    if (diff === "medium") {
+      setGameBoard(medium);
+    } else if (diff === "easy") {
+      setGameBoard(easy);
+    } else if (diff === "hard") {
+      setGameBoard(hard);
+    } else if (diff === "insane") {
+      setGameBoard(insane);
     }
   }, [diff]);
 
   //GAME LOGIC
   //function to toggle game difficulty
-  function changeDifficulty() {
-    if (diff === "hard") {
-      setDiff("easy");
-    } else if (diff === "easy") {
-      setDiff("hard");
-    }
-  }
+  // function changeDifficulty() {
+  //   if (diff === "hard") {
+  //     setDiff("easy");
+  //   } else if (diff === "easy") {
+  //     setDiff("hard");
+  //   }
+  // }
 
   //function to add random grid location to gameSequence
   function addToGameSequence() {
@@ -92,7 +100,7 @@ function App() {
     setGameSequence([4]);
     setExpected(null);
     setIsGameOver(!isGameOver);
-    setGameBoard(defaultHardGrid);
+    setGameBoard(medium);
     setResult("");
   }
 
@@ -179,8 +187,14 @@ function App() {
         <h2 className="score">
           score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}
         </h2>
-        <button onClick={changeDifficulty} className={"level"}>
-          Level
+        <button onClick={() => setDiff("easy")} className="level easy">
+          Easy
+        </button>
+        <button onClick={() => setDiff("medium")} className="level medium">
+          Medium
+        </button>
+        <button onClick={() => setDiff("hard")} className="level hard">
+          Hard
         </button>
         <h2 className="alert">{result}</h2>
         {roundsPlayed === 0 && (
