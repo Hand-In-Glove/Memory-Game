@@ -20,6 +20,11 @@ button {
   height: 2em;
   margin: 15px;
 }
+.level {
+  grid-row: 3;
+  grid-column: 1;
+}
+
 h1 {
   grid-row: 1;
   grid-column: 2;

@@ -9,6 +9,15 @@ defaultHardGrid.fill({ illuminated: false });
 const defaultEasyGrid = new Array(4);
 defaultEasyGrid.fill({ illuminated: false });
 
+// const defaultGrid = new Array(9);
+// defaultGrid.fill({ illuminated: false, level: "medium" });
+// const easy = new Array(3);
+// easy.fill({ illuminated: false, level: "easy" });
+// const hard = new Array(12);
+// hard.fill({ illuminated: false, level: "hard" });
+// const insane = new Array(16);
+// insane.fill({ illuminated: false, level: "insane" });
+
 function App() {
   //array to hold grid locations - starts on hard by default
   const [gameBoard, setGameBoard] = useState(defaultHardGrid);
@@ -170,7 +179,9 @@ function App() {
         <h2 className="score">
           score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}
         </h2>
-        <button onClick={changeDifficulty}>Change Difficulty</button>
+        <button onClick={changeDifficulty} className={"level"}>
+          Level
+        </button>
         <h2 className="alert">{result}</h2>
         {roundsPlayed === 0 && (
           <button
