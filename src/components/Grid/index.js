@@ -8,9 +8,9 @@ import css from "./Grid.module.css";
 //select the square to highlight by passing an id to it Square(id)
 //
 
-function Grid({ gameBoard, compareSequence, illuminated }) {
+function Grid({ gameBoard, compareSequence, diff }) {
   return (
-    <div className={css.grid}>
+    <div className={diff === "hard" ? css.gridHard : css.gridEasy}>
       {gameBoard.map((item, index) => (
         <Square
           compareSequence={compareSequence}

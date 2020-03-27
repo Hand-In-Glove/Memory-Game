@@ -3,18 +3,23 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Grid from "../Grid";
 
-const defaultGrid = new Array(9);
-defaultGrid.fill({ illuminated: false });
+const defaultHardGrid = new Array(9);
+defaultHardGrid.fill({ illuminated: false });
+
+const defaultEasyGrid = new Array(4);
+defaultEasyGrid.fill({ illuminated: false });
 
 function App() {
-  //array to hold grid locations
-  const [gameBoard, setGameBoard] = useState(defaultGrid);
+  //array to hold grid locations - starts on hard by default
+  const [gameBoard, setGameBoard] = useState(defaultHardGrid);
 
   //state to hold number of rounds played
   const [roundsPlayed, setRoundsPlayed] = useState(0);
 
   //array to hold randomly generated grid locations as game sequence
-  const [gameSequence, setGameSequence] = useState([4]);
+  const [gameSequence, setGameSequence] = useState([
+    Math.floor(Math.random() * gameBoard.length)
+  ]);
 
   //state to hold number of locations to guess
   const [numberToGuess, setNumberToGuess] = useState(gameSequence.length);
@@ -25,19 +30,35 @@ function App() {
   //state to display if guess was correct or not
   const [result, setResult] = useState("");
 
+  //state to hold game difficulty, number of playable grid locations is dependent on this state
+  const [diff, setDiff] = useState("hard");
+
   const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
     setNumberToGuess(gameSequence.length - 1);
-  }, [gameSequence]);
-
-  useEffect(() => {
     setExpected(gameSequence[0]);
   }, [gameSequence]);
 
-  //GAME LOGIC
-  //function to add random grid location to gameSequence
+  useEffect(() => {
+    if (diff === "hard") {
+      setGameBoard(defaultHardGrid);
+    } else {
+      setGameBoard(defaultEasyGrid);
+    }
+  }, [diff]);
 
+  //GAME LOGIC
+  //function to toggle game difficulty
+  function changeDifficulty() {
+    if (diff === "hard") {
+      setDiff("easy");
+    } else if (diff === "easy") {
+      setDiff("hard");
+    }
+  }
+
+  //function to add random grid location to gameSequence
   function addToGameSequence() {
     setGameSequence(
       [...gameSequence, Math.floor(Math.random() * gameBoard.length)]
@@ -62,7 +83,7 @@ function App() {
     setGameSequence([4]);
     setExpected(null);
     setIsGameOver(!isGameOver);
-    setGameBoard(defaultGrid);
+    setGameBoard(defaultHardGrid);
     setResult("");
   }
 
@@ -141,10 +162,15 @@ function App() {
     <>
       <div className="App">
         <h1>Simon!</h1>
-        <Grid gameBoard={gameBoard} compareSequence={compareSequence} />
+        <Grid
+          gameBoard={gameBoard}
+          compareSequence={compareSequence}
+          diff={diff}
+        />
         <h2 className="score">
           score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}
         </h2>
+        <button onClick={changeDifficulty}>Change Difficulty</button>
         <h2 className="alert">{result}</h2>
         {roundsPlayed === 0 && (
           <button
