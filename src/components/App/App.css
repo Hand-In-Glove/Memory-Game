@@ -30,10 +30,15 @@ h1 {
   text-shadow: 2px 2px 5px black;
 }
 
-h2 {
+.score {
   font-family: var(--MainFont);
   grid-row: 2;
   grid-column: 3;
+  text-shadow: 2px 2px 5px white;
+}
+
+.alert {
+  font-family: var(--MainFont);
   text-shadow: 2px 2px 5px white;
 }
 

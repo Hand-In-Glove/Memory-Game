@@ -63,6 +63,7 @@ function App() {
     setExpected(null);
     setIsGameOver(!isGameOver);
     setGameBoard(defaultGrid);
+    setResult("");
   }
 
   //function to compare playerSequence with gameSequence
@@ -141,8 +142,10 @@ function App() {
       <div className="App">
         <h1>Simon!</h1>
         <Grid gameBoard={gameBoard} compareSequence={compareSequence} />
-        <h2>score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}</h2>
-
+        <h2 className="score">
+          score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}
+        </h2>
+        <h2 className="alert">{result}</h2>
         {roundsPlayed === 0 && (
           <button
             style={{ display: "block", margin: "0 auto" }}
@@ -153,7 +156,6 @@ function App() {
             Play!
           </button>
         )}
-        <h2>{result}</h2>
         {isGameOver && (
           <button
             style={{ display: "block", margin: "0 auto" }}
