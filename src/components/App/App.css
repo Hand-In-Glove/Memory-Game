@@ -2,7 +2,7 @@
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 20% 1fr 1fr;
+  grid-template-rows: 20% 1fr 1fr 20%;
   justify-content: center;
   align-content: center;
   height: 100vh;
@@ -20,9 +20,22 @@ button {
   height: 2em;
   margin: 15px;
 }
+
 .level {
-  grid-row: 3;
+  grid-row: 4;
+  display: inline-block;
+}
+
+.easy {
   grid-column: 1;
+}
+
+.medium {
+  grid-column: 2;
+}
+
+.hard {
+  grid-column: 3;
 }
 
 h1 {
@@ -47,34 +60,4 @@ h1 {
   grid-row: 2;
   grid-column: 1;
   text-shadow: 2px 2px 5px white;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

@@ -10,7 +10,13 @@ import css from "./Grid.module.css";
 
 function Grid({ gameBoard, compareSequence, diff }) {
   return (
-    <div className={diff === "hard" ? css.gridHard : css.gridEasy}>
+    <div
+      className={
+        (diff === "medium" && css.gridMedium) ||
+        (diff === "easy" && css.gridEasy) ||
+        (diff === "hard" && css.gridHard)
+      }
+    >
       {gameBoard.map((item, index) => (
         <Square
           compareSequence={compareSequence}
