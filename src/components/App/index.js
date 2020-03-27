@@ -188,15 +188,17 @@ function App() {
         <h2 className="score">
           score:{roundsPlayed > 0 && <h2>{roundsPlayed - 1} </h2>}
         </h2>
-        <button onClick={() => setDiff("easy")} className="level easy">
-          Easy
-        </button>
-        <button onClick={() => setDiff("medium")} className="level medium">
-          Medium
-        </button>
-        <button onClick={() => setDiff("hard")} className="level hard">
-          Hard
-        </button>
+        <span>
+          <button onClick={() => setDiff("easy")} className="level easy">
+            Easy
+          </button>
+          <button onClick={() => setDiff("medium")} className="level medium">
+            Medium
+          </button>
+          <button onClick={() => setDiff("hard")} className="level hard">
+            Hard
+          </button>
+        </span>
         <h2 className="alert">{result}</h2>
         {roundsPlayed === 0 && (
           <button
@@ -222,5 +224,4 @@ function App() {
     </>
   );
 }
-
 export default App;

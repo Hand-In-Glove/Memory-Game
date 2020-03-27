@@ -2,7 +2,7 @@
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 20% 1fr 1fr 20%;
+  grid-template-rows: 20% 1fr 1fr 1fr 1fr;
   justify-content: center;
   align-content: center;
   height: 100vh;
@@ -22,8 +22,9 @@ button {
 }
 
 .level {
-  grid-row: 4;
+  grid-row: 1;
   display: inline-block;
+  align-content: center;
 }
 
 .easy {
