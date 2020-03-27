@@ -39,6 +39,8 @@ h1 {
 
 .alert {
   font-family: var(--MainFont);
+  grid-row: 2;
+  grid-column: 1;
   text-shadow: 2px 2px 5px white;
 }
 
