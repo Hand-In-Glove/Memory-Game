@@ -49,7 +49,7 @@ function App() {
     addToGameSequence();
     gameSequence.map((item, i) => {
       setTimeout(() => {
-        illuminateSquare(item);
+        illuminateSquare(item, i);
       }, 1000 * i);
     });
   }
@@ -93,7 +93,7 @@ function App() {
     console.log(pattern);
     setTimeout(() => {
       switchOff(index);
-    }, 500 * index);
+    }, 500);
   }
 
   //how the flip do we animate this bleddy grid? - we need to loop over the gameSequence and for each item in array change the className for an interval
@@ -103,7 +103,7 @@ function App() {
   // and back again
 
   // This uses the index of the square
-  function illuminateSquare(index) {
+  function illuminateSquare(index, i) {
     const pattern = [
       ...gameBoard.slice(0, index),
       {
@@ -116,7 +116,7 @@ function App() {
     console.log(pattern);
     setTimeout(() => {
       switchOff(index);
-    }, 500 * index);
+    }, 500);
   }
 
   function switchOff(index) {
