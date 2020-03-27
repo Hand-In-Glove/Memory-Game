@@ -1,8 +1,18 @@
-.grid {
+.gridHard {
   grid-row: 2;
   grid-column: 2;
   height: 306px;
   width: 306px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+.gridEasy {
+  grid-row: 2;
+  grid-column: 2;
+  height: 202px;
+  width: 202px;
   display: flex;
   flex-wrap: wrap;
   margin: 30px;
