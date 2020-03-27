@@ -96,11 +96,11 @@ function App() {
   }
 
   function resetGame() {
+    setGameBoard(medium);
     setRoundsPlayed(0);
-    setGameSequence([4]);
+    setGameSequence([Math.floor(Math.random() * gameBoard.length)]);
     setExpected(null);
     setIsGameOver(!isGameOver);
-    setGameBoard(medium);
     setResult("");
   }
 
