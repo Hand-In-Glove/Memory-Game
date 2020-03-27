@@ -96,6 +96,7 @@ function App() {
   }
 
   function resetGame() {
+    setDiff("medium");
     setGameBoard(medium);
     setRoundsPlayed(0);
     setGameSequence([Math.floor(Math.random() * gameBoard.length)]);
